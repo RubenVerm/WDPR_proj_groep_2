@@ -1,8 +1,8 @@
 {
 "SpaProxyServer": {
-"ServerUrl": "https://localhost:44489",
+"ServerUrl": "https://localhost:44433",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "C:\\Users\\RubenVermeulen\\OneDrive - Secure Dynamic IT Diensten\\Documenten\\WDPR\\WDPR_proj_groep_2\\ClientApp\\",
+"WorkingDirectory": "C:\\Users\\ruben\\Documents\\School\\WDPR\\MyApp\\MyApp\\ClientApp\\",
 "MaxTimeoutInSeconds": "120"
 }
 }

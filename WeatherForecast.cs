@@ -1,4 +1,4 @@
-namespace opdrachtarchitectuur;
+namespace MyApp;
 
 public class WeatherForecast
 {

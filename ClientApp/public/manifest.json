@@ -1,6 +1,6 @@
 {
-  "short_name": "opdrachtarchitectuur",
-  "name": "opdrachtarchitectuur",
+  "short_name": "MyApp",
+  "name": "MyApp",
   "icons": [
     {
       "src": "favicon.ico",
