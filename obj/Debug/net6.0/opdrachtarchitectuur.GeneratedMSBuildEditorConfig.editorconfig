@@ -1,0 +1,25 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = opdrachtarchitectuur
+build_property.RootNamespace = opdrachtarchitectuur
+build_property.ProjectDir = c:\Users\RubenVermeulen\OneDrive - Secure Dynamic IT Diensten\Documenten\WDPR\WDPR_proj_groep_2\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = c:\Users\RubenVermeulen\OneDrive - Secure Dynamic IT Diensten\Documenten\WDPR\WDPR_proj_groep_2
+build_property._RazorSourceGeneratorDebug = 
+
+[c:/Users/RubenVermeulen/OneDrive - Secure Dynamic IT Diensten/Documenten/WDPR/WDPR_proj_groep_2/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/RubenVermeulen/OneDrive - Secure Dynamic IT Diensten/Documenten/WDPR/WDPR_proj_groep_2/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 

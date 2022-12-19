@@ -1,0 +1,30 @@
+{
+  "FilePath": "c:\\Users\\RubenVermeulen\\OneDrive - Secure Dynamic IT Diensten\\Documenten\\WDPR\\WDPR_proj_groep_2\\opdrachtarchitectuur.csproj",
+  "Configuration": {
+    "ConfigurationName": "MVC-3.0",
+    "LanguageVersion": "6.0",
+    "Extensions": [
+      {
+        "ExtensionName": "MVC-3.0"
+      }
+    ]
+  },
+  "ProjectWorkspaceState": {
+    "TagHelpers": [],
+    "CSharpLanguageVersion": 1000
+  },
+  "RootNamespace": "opdrachtarchitectuur",
+  "Documents": [
+    {
+      "FilePath": "c:\\Users\\RubenVermeulen\\OneDrive - Secure Dynamic IT Diensten\\Documenten\\WDPR\\WDPR_proj_groep_2\\Pages\\Error.cshtml",
+      "TargetPath": "Pages\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\RubenVermeulen\\OneDrive - Secure Dynamic IT Diensten\\Documenten\\WDPR\\WDPR_proj_groep_2\\Pages\\_ViewImports.cshtml",
+      "TargetPath": "Pages\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    }
+  ],
+  "SerializationFormat": "0.2"
+}
