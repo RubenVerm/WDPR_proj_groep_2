@@ -14,6 +14,7 @@ public class BandMember
   public string LastName { get; set; }
 
   // Navigation property
+  [ForeignKey("BandId")]
   public virtual Band Band { get; set; }
 
 }

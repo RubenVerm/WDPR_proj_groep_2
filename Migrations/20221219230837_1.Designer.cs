@@ -11,8 +11,8 @@ using ORM;
 namespace MyApp.Migrations
 {
     [DbContext(typeof(TheaterContext))]
-    [Migration("20221219152939_databaseUpdatev3")]
-    partial class databaseUpdatev3
+    [Migration("20221219230837_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,7 +22,7 @@ namespace MyApp.Migrations
 
             modelBuilder.Entity("ORM.Band", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BandId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -34,7 +34,7 @@ namespace MyApp.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("BandId");
 
                     b.ToTable("Bands");
                 });
@@ -65,31 +65,31 @@ namespace MyApp.Migrations
 
             modelBuilder.Entity("ORM.Hall", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("HalldId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("FirstClassSeats")
+                    b.Property<int?>("FirstClassSeats")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("SecondClassSeats")
+                    b.Property<int?>("SecondClassSeats")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ThirdClassSeats")
+                    b.Property<int?>("ThirdClassSeats")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.HasKey("HalldId");
 
                     b.ToTable("Halls");
                 });
 
             modelBuilder.Entity("ORM.Room", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RoomId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -100,7 +100,7 @@ namespace MyApp.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("RoomId");
 
                     b.ToTable("Rooms");
                 });
@@ -121,7 +121,7 @@ namespace MyApp.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("HallId")
+                    b.Property<int>("HalldId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("RoomId")
@@ -142,7 +142,7 @@ namespace MyApp.Migrations
 
                     b.HasIndex("BandId");
 
-                    b.HasIndex("HallId");
+                    b.HasIndex("HalldId");
 
                     b.HasIndex("RoomId");
 
@@ -170,7 +170,7 @@ namespace MyApp.Migrations
 
                     b.HasOne("ORM.Hall", "Hall")
                         .WithMany("Shows")
-                        .HasForeignKey("HallId")
+                        .HasForeignKey("HalldId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

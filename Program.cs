@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<TheaterContext>(options =>
-    options.UseSqlite("Data Source= mijndatabase.db" ?? throw new InvalidOperationException("Connection string 'PretparkContext' not found.")));
+    options.UseSqlite("Data Source= MijnDatabase.db" ?? throw new InvalidOperationException("Connection string 'PretparkContext' not found.")));
 
 builder.Services.AddControllersWithViews();
 

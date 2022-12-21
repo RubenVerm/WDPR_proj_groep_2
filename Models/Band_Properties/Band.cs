@@ -8,7 +8,7 @@ namespace ORM
 public class Band
 {
   [Key]
-  public int Id { get; set; }
+  public int BandId { get; set; }
   [Required]
   public string Name { get; set; }
   [Required]

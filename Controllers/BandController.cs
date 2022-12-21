@@ -54,7 +54,7 @@ namespace MyApp.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBand(int id, Band band)
         {
-            if (id != band.Id)
+            if (id != band.BandId)
             {
                 return BadRequest();
             }
@@ -92,7 +92,7 @@ namespace MyApp.Controllers
             _context.Bands.Add(band);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBand", new { id = band.Id }, band);
+            return CreatedAtAction("GetBand", new { id = band.BandId }, band);
         }
 
         // DELETE: api/Band/5
@@ -117,7 +117,7 @@ namespace MyApp.Controllers
 
         private bool BandExists(int id)
         {
-            return (_context.Bands?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Bands?.Any(e => e.BandId == id)).GetValueOrDefault();
         }
     }
 }

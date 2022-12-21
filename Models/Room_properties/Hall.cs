@@ -6,12 +6,11 @@ namespace ORM
 public class Hall
 {
   [Key]
-  public int Id { get; set; }
-  [Required]
+  public int HalldId { get; set; }
   public string Name { get; set; }
-  public int FirstClassSeats { get; set; }
-  public int SecondClassSeats { get; set; }
-  public int ThirdClassSeats { get; set; }
+  public int? FirstClassSeats { get; set; }
+  public int? SecondClassSeats { get; set; }
+  public int? ThirdClassSeats { get; set; }
 
   //Tussentabel met zaalnummer en shownummer
   public ICollection<Show> Shows { get; set; }

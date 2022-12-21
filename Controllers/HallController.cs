@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ORM;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MyApp.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class HallController : ControllerBase
     {
         private readonly TheaterContext _context;
@@ -19,6 +15,20 @@ namespace MyApp.Controllers
         {
             _context = context;
         }
+
+        // // GET: api/Hall
+        // [HttpGet]
+        // public <IEnumerable<Hall> Get()
+        // {
+        //   return Enumerable.Range(1, 5).Select(index => new Hall
+        // {
+        //     Name = 
+        //     firstclass = Random.Shared.Next(-20, 55),
+        //     Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        // })
+        // .ToArray();
+        // }
+
 
         // GET: api/Hall
         [HttpGet]
@@ -54,7 +64,7 @@ namespace MyApp.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHall(int id, Hall hall)
         {
-            if (id != hall.Id)
+            if (id != hall.HalldId)
             {
                 return BadRequest();
             }
@@ -92,7 +102,7 @@ namespace MyApp.Controllers
             _context.Halls.Add(hall);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetHall", new { id = hall.Id }, hall);
+            return CreatedAtAction("GetHall", new { id = hall.HalldId }, hall);
         }
 
         // DELETE: api/Hall/5
@@ -117,7 +127,7 @@ namespace MyApp.Controllers
 
         private bool HallExists(int id)
         {
-            return (_context.Halls?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Halls?.Any(e => e.HalldId == id)).GetValueOrDefault();
         }
     }
 }

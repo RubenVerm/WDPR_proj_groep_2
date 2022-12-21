@@ -7,7 +7,7 @@ namespace ORM
 public class Room
 {
   [Key]
-  public int Id { get; set; }
+  public int RoomId { get; set; }
   [Required]
   public string Name { get; set; }
   public int Capacity { get; set; }

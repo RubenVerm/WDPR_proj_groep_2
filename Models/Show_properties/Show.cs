@@ -9,11 +9,7 @@ namespace ORM
   {
     [Key]
     public int ShowId { get; set; }
-
-
-    [Required]
     public string TypeShow { get; set; }  //normaal, Kleinschalige voorstellingen , Workshop
-    [Required]
     public string ShowName { get; set; }
     public string Genre { get; set; }
     public int Duration { get; set; }
@@ -23,11 +19,11 @@ namespace ORM
 
 
     // Navigation property
-    [ForeignKey("Bandid")]
+    [ForeignKey("BandId")]
     public virtual Band Band { get; set; }
-    [ForeignKey("Halldid")]
+    [ForeignKey("HalldId")]
     public virtual Hall Hall { get; set; }
-    [ForeignKey("Roomid")]
+    [ForeignKey("RoomId")]
     public virtual Room Room { get; set; }
 
   }

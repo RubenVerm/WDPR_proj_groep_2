@@ -7,7 +7,7 @@ using ORM;
 
 #nullable disable
 
-namespace ORM
+namespace MyApp.Migrations
 {
     [DbContext(typeof(TheaterContext))]
     partial class TheaterContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace ORM
 
             modelBuilder.Entity("ORM.Band", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BandId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -31,7 +31,7 @@ namespace ORM
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("BandId");
 
                     b.ToTable("Bands");
                 });
@@ -62,31 +62,31 @@ namespace ORM
 
             modelBuilder.Entity("ORM.Hall", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("HalldId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("FirstClassSeats")
+                    b.Property<int?>("FirstClassSeats")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("SecondClassSeats")
+                    b.Property<int?>("SecondClassSeats")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ThirdClassSeats")
+                    b.Property<int?>("ThirdClassSeats")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.HasKey("HalldId");
 
                     b.ToTable("Halls");
                 });
 
             modelBuilder.Entity("ORM.Room", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RoomId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -97,7 +97,7 @@ namespace ORM
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("RoomId");
 
                     b.ToTable("Rooms");
                 });
@@ -108,7 +108,7 @@ namespace ORM
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Bandid")
+                    b.Property<int>("BandId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Duration")
@@ -118,10 +118,10 @@ namespace ORM
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Halldid")
+                    b.Property<int>("HalldId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Roomid")
+                    b.Property<int>("RoomId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("ShowDate")
@@ -137,11 +137,11 @@ namespace ORM
 
                     b.HasKey("ShowId");
 
-                    b.HasIndex("Bandid");
+                    b.HasIndex("BandId");
 
-                    b.HasIndex("Halldid");
+                    b.HasIndex("HalldId");
 
-                    b.HasIndex("Roomid");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Shows");
                 });
@@ -161,19 +161,19 @@ namespace ORM
                 {
                     b.HasOne("ORM.Band", "Band")
                         .WithMany("Shows")
-                        .HasForeignKey("Bandid")
+                        .HasForeignKey("BandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ORM.Hall", "Hall")
                         .WithMany("Shows")
-                        .HasForeignKey("Halldid")
+                        .HasForeignKey("HalldId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ORM.Room", "Room")
                         .WithMany("Shows")
-                        .HasForeignKey("Roomid")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
