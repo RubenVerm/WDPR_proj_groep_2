@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using ORM;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace MyApp.Controllers
 {
+    
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class HallController : ControllerBase
     {
         private readonly TheaterContext _context;
@@ -15,19 +17,6 @@ namespace MyApp.Controllers
         {
             _context = context;
         }
-
-        // // GET: api/Hall
-        // [HttpGet]
-        // public <IEnumerable<Hall> Get()
-        // {
-        //   return Enumerable.Range(1, 5).Select(index => new Hall
-        // {
-        //     Name = 
-        //     firstclass = Random.Shared.Next(-20, 55),
-        //     Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        // })
-        // .ToArray();
-        // }
 
 
         // GET: api/Hall
@@ -40,6 +29,16 @@ namespace MyApp.Controllers
           }
             return await _context.Halls.ToListAsync();
         }
+        
+        // // GET: api/Hall
+        // [HttpGet]
+        // public ActionResult<IEnumerable<Hall>> GetHalls()
+        // {
+        //     // retrieve the data from the database
+        //     var data = _context.Halls.ToList();
+
+        //     return Ok(data);
+        // }
 
         // GET: api/Hall/5
         [HttpGet("{id}")]

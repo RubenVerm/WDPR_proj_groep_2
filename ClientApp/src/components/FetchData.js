@@ -1,53 +1,50 @@
 import React, { Component } from 'react';
 
-export class FetchData extends Component {
-  static displayName = FetchData.name;
 
+export class FetchData extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { HallDatas: [], loading: true };
+    this.state = {
+      data: []
+    };
   }
-
   componentDidMount() {
-    this.populateHallData();
-  }
-
-  static renderHallDatasTable(HallDatas) {
+    fetch("https://localhost:7092/api/Hall", {
+            mode: 'no-cors',
+            method: 'GET'
+          }).then(
+            (result) => {
+              this.setState([result]);
+      }
+    );
+  };
+  
+  render() {
     return (
-      <table className='table table-striped' aria-labelledby="tabelLabel">
+      <table>
         <thead>
           <tr>
-            <th>Date</th>
+          <th>Hall ID</th>
+          <th>Name</th>
+          <th>First Class Seats</th>
+          <th>Second Class Seats</th>
+          <th>Third Class Seats</th>
+          <th>Shows</th>
           </tr>
         </thead>
         <tbody>
-          {HallDatas.map(HallData =>
-            <tr key={HallData.name}>
-              <td>{HallData.name}</td>
-            </tr>
-          )}
+          {this.state.data.map(item => (
+            <tr key={item.halldId}>
+            <td>{item.halldId}</td>
+            <td>{item.name}</td>
+            <td>{item.firstClassSeats}</td>
+            <td>{item.secondClassSeats}</td>
+            <td>{item.thirdClassSeats}</td>
+            <td>{item.shows}</td>
+          </tr>
+          ))}
         </tbody>
       </table>
     );
-  }
-
-  render() {
-    let contents = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : FetchData.renderHallDatasTable(this.state.HallDatas);
-
-    return (
-      <div>
-        <h1 id="tabelLabel" >Hall Data</h1>
-        <p>This component demonstrates fetching data from the server.</p>
-        {contents}
-      </div>
-    );
-  }
-
-  async populateHallData() {
-    const response = await fetch("Halls");
-    const data = await response.json();
-    this.setState({ HallDatas: data, loading: false });
-  }
+}
 }
