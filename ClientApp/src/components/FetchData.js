@@ -5,42 +5,42 @@ export class FetchData extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
-    };
-  }
-  componentDidMount() {
-    fetch("https://localhost:7092/api/Hall", {
-            mode: 'no-cors',
-            method: 'GET'
-          }).then(
-            (result) => {
-              this.setState([result]);
-      }
-    );
-  };
+        Halls: []
+    }
+}
   
+  componentDidMount() {
+    fetch("https://localhost:7092/api/Hall")
+    .then(res => res.json())
+    .then(
+        (halls) => {
+            this.setState({ Halls: halls });
+        },
+        (error) => {
+            alert(error);
+        }
+    )
+}
   render() {
     return (
-      <table>
+      <table className='styled-table'>
         <thead>
-          <tr>
-          <th>Hall ID</th>
-          <th>Name</th>
-          <th>First Class Seats</th>
-          <th>Second Class Seats</th>
-          <th>Third Class Seats</th>
-          <th>Shows</th>
+          <tr>         
+          <th>Zaalnummer</th>
+          <th>Voorstellingen</th>
+          <th>Eersterangs stoelen</th>
+          <th>Tweederangs stoelen</th>
+          <th>Derderangs stoelen</th>
           </tr>
         </thead>
         <tbody>
-          {this.state.data.map(item => (
-            <tr key={item.halldId}>
-            <td>{item.halldId}</td>
+          {this.state.Halls.map(item => (
+            <tr key={item.halldId} className='active-row'>
             <td>{item.name}</td>
+            <td>{item.shows}</td>
             <td>{item.firstClassSeats}</td>
             <td>{item.secondClassSeats}</td>
             <td>{item.thirdClassSeats}</td>
-            <td>{item.shows}</td>
           </tr>
           ))}
         </tbody>

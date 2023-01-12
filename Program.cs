@@ -2,8 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using ORM;
 
-var builder = WebApplication.CreateBuilder(args);
 
+var builder = WebApplication.CreateBuilder(args);
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy  =>
+                      {
+                          policy.WithOrigins("https://localhost:7092",
+                                              "https://localhost:44433");
+                      });
+});
 // Add services to the container.
 builder.Services.AddDbContext<TheaterContext>(options =>
     options.UseSqlite("Data Source= MijnDatabase.db" ?? throw new InvalidOperationException("Connection string 'PretparkContext' not found.")));
@@ -22,7 +34,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
+app.UseCors(MyAllowSpecificOrigins);
 
 app.MapControllerRoute(
     name: "default",
