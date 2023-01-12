@@ -11124,11 +11124,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\MyApp.csproj",
+      "projectUniqueName": "c:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\MyApp.csproj",
       "projectName": "MyApp",
-      "projectPath": "C:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\MyApp.csproj",
+      "projectPath": "c:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\MyApp.csproj",
       "packagesPath": "C:\\Users\\ruben\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\obj\\",
+      "outputPath": "c:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ruben\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ORM;
 
@@ -10,9 +11,11 @@ using ORM;
 namespace MyApp.Migrations
 {
     [DbContext(typeof(TheaterContext))]
-    partial class TheaterContextModelSnapshot : ModelSnapshot
+    [Migration("20230112115504_shows1")]
+    partial class shows1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
@@ -118,7 +121,7 @@ namespace MyApp.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("HallId")
+                    b.Property<int?>("HalldId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("RoomId")
@@ -139,7 +142,7 @@ namespace MyApp.Migrations
 
                     b.HasIndex("BandId");
 
-                    b.HasIndex("HallId");
+                    b.HasIndex("HalldId");
 
                     b.HasIndex("RoomId");
 
@@ -167,7 +170,7 @@ namespace MyApp.Migrations
 
                     b.HasOne("ORM.Hall", "Hall")
                         .WithMany("Shows")
-                        .HasForeignKey("HallId");
+                        .HasForeignKey("HalldId");
 
                     b.HasOne("ORM.Room", "Room")
                         .WithMany("Shows")

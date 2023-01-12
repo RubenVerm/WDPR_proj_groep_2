@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-export class FetchData extends React.Component {
+export class Halls extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
