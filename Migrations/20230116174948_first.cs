@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyApp.Migrations
 {
     /// <inheritdoc />
-    public partial class _1 : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,10 +15,10 @@ namespace MyApp.Migrations
                 name: "Bands",
                 columns: table => new
                 {
-                    BandId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Genre = table.Column<string>(type: "TEXT", nullable: false)
+                    BandId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Genre = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,12 +29,12 @@ namespace MyApp.Migrations
                 name: "Halls",
                 columns: table => new
                 {
-                    HalldId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    FirstClassSeats = table.Column<int>(type: "INTEGER", nullable: true),
-                    SecondClassSeats = table.Column<int>(type: "INTEGER", nullable: true),
-                    ThirdClassSeats = table.Column<int>(type: "INTEGER", nullable: true)
+                    HalldId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstClassSeats = table.Column<int>(type: "int", nullable: true),
+                    SecondClassSeats = table.Column<int>(type: "int", nullable: true),
+                    ThirdClassSeats = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -45,10 +45,10 @@ namespace MyApp.Migrations
                 name: "Rooms",
                 columns: table => new
                 {
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Capacity = table.Column<int>(type: "INTEGER", nullable: false)
+                    RoomId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,11 +59,11 @@ namespace MyApp.Migrations
                 name: "BandMembers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", nullable: false),
-                    BandId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BandId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,16 +80,16 @@ namespace MyApp.Migrations
                 name: "Shows",
                 columns: table => new
                 {
-                    ShowId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    TypeShow = table.Column<string>(type: "TEXT", nullable: false),
-                    ShowName = table.Column<string>(type: "TEXT", nullable: false),
-                    Genre = table.Column<string>(type: "TEXT", nullable: false),
-                    Duration = table.Column<int>(type: "INTEGER", nullable: false),
-                    ShowDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    BandId = table.Column<int>(type: "INTEGER", nullable: false),
-                    HalldId = table.Column<int>(type: "INTEGER", nullable: false),
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ShowId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TypeShow = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShowName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Duration = table.Column<int>(type: "int", nullable: false),
+                    ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BandId = table.Column<int>(type: "int", nullable: false),
+                    HallId = table.Column<int>(type: "int", nullable: true),
+                    RoomId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -101,17 +101,15 @@ namespace MyApp.Migrations
                         principalColumn: "BandId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Shows_Halls_HalldId",
-                        column: x => x.HalldId,
+                        name: "FK_Shows_Halls_HallId",
+                        column: x => x.HallId,
                         principalTable: "Halls",
-                        principalColumn: "HalldId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "HalldId");
                     table.ForeignKey(
                         name: "FK_Shows_Rooms_RoomId",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
-                        principalColumn: "RoomId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RoomId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -125,9 +123,9 @@ namespace MyApp.Migrations
                 column: "BandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shows_HalldId",
+                name: "IX_Shows_HallId",
                 table: "Shows",
-                column: "HalldId");
+                column: "HallId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shows_RoomId",

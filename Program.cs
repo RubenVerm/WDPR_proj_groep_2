@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ORM;
 
+var connectionString = "Server=RUBEN\\SQLEXPRESS;Database=TestDb;Integrated Security=True; TrustServerCertificate=True;";
 
 var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -18,7 +19,7 @@ builder.Services.AddCors(options =>
 });
 // Add services to the container.
 builder.Services.AddDbContext<TheaterContext>(options =>
-    options.UseSqlite("Data Source= MijnDatabase.db" ?? throw new InvalidOperationException("Connection string 'PretparkContext' not found.")));
+   options.UseSqlServer(connectionString ?? throw new InvalidOperationException("Connection string 'PretparkContext' not found.")));
 
 builder.Services.AddControllersWithViews();
 
