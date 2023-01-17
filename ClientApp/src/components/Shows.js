@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
 export class Shows extends React.Component {
@@ -49,6 +49,7 @@ export class Shows extends React.Component {
           ))}
         </tbody>
       </table>
+  
     );
 }
 }

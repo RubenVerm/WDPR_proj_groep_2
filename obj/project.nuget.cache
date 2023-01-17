@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0VaOGU9WL9QO8pyLyhIpaFBZfvw86RypcCt+7xHHVcWjhMEazzI4XV9KF1XELWuzK8+tCE0P84/G4blODgsPOg==",
+  "dgSpecHash": "glNsSiv+RmcRf2HlcEXUwg2ljUXfK1TJ923h2Avl+hFMdQVcYYAnsVa+wc5GG9wXGtzKXdmC4k1SZ6S+XW3KYQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\MyApp.csproj",
+  "projectFilePath": "C:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\MyApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ruben\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ruben\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

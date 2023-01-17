@@ -3,6 +3,8 @@ import { Halls } from "./components/Halls";
 import { Home } from "./components/Home";
 import { Bands } from "./components/Bands";
 import { Shows } from "./components/Shows";
+import { SeatsSelection } from"./components/SeatsSelection";
+import { ShoppingCart } from"./components/ShoppingCart";
 
 const AppRoutes = [
   {
@@ -24,6 +26,14 @@ const AppRoutes = [
   {
     path: '/Shows',
     element: <Shows />
+  },
+  {
+    path: '/SeatsSelection',
+    element: <SeatsSelection />
+  },
+  {
+    path: '/ShoppingCart',
+    element: <ShoppingCart />
   },
 ];
 

@@ -46,3 +46,45 @@ code {
   font-weight: bold;
   color: #009879;
 }
+
+/* Seat selection */
+.seats-selection {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.seats-grid-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.first-class-seats-horizontal,
+.second-class-seats-horizontal,
+.third-class-seats-horizontal {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+.seat {
+  background-color: #ccc;
+  border: 1px solid #fff;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+
+.seat.selected {
+  background-color: #00cc00;
+}
+
+select {
+  width: 150px;
+  padding: 10px;
+  margin: 10px;
+}
