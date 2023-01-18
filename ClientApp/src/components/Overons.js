@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-export class SeatsSelection extends Component {
+export class Overons extends Component {
   constructor(props) {
     super(props);
     this.state = {

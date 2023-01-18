@@ -33,22 +33,25 @@ export class NavMenu extends Component {
                 <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/Agenda">Agenda</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/Halls">Zalen</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/Tickets">Tickets</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/Shows">Show aanmaken</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/Huren">Huren</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/Bands">Bands zien</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/Dontaties">Dontaties</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/SeatsSelection">Stoelen kiezen</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/Overons">Over ons</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/ShoppingCart">Winkelmand</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/Contact">Contact</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/MijnLaak">MijnLaak</NavLink>
               </NavItem>
             </ul>
           </Collapse>

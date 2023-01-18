@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export class Shows extends React.Component {
+export class Dontaties extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export class Bands extends React.Component {
+export class Agenda extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

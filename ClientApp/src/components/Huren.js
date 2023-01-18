@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export class Halls extends React.Component {
+export class Huren extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

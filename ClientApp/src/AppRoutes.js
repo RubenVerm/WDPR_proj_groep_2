@@ -1,10 +1,11 @@
-import { Counter } from "./components/Counter";
-import { Halls } from "./components/Halls";
+import { Agenda } from "./components/Agenda";
+import { Huren } from "./components/Huren";
 import { Home } from "./components/Home";
-import { Bands } from "./components/Bands";
-import { Shows } from "./components/Shows";
-import { SeatsSelection } from"./components/SeatsSelection";
-import { ShoppingCart } from"./components/ShoppingCart";
+import { Tickets } from "./components/Tickets";
+import { Dontaties } from "./components/Dontaties";
+import { Overons } from "./components/Overons";
+import { Contact } from"./components/Contact";
+import { MijnLaak } from"./components/MijnLaak";
 
 const AppRoutes = [
   {
@@ -12,28 +13,31 @@ const AppRoutes = [
     element: <Home />
   },
   {
-    path: '/counter',
-    element: <Counter />
+    path: '/Agenda',
+    element: <Agenda />
   },
   {
-    path: '/Halls',
-    element: <Halls />
+    path: '/Tickets',
+    element: <Tickets />
   },
   {
-    path: '/Bands',
-    element: <Bands />
+    path: '/Huren',
+    element: <Huren />
   },
   {
-    path: '/Shows',
-    element: <Shows />
+    path: '/Dontaties',
+    element: <Dontaties />
   },
   {
-    path: '/SeatsSelection',
-    element: <SeatsSelection />
+    path: '/Overons',
+    element: <Overons />
   },
   {
-    path: '/ShoppingCart',
-    element: <ShoppingCart />
+    path: '/Contact',
+    element: <Contact />
+  },{
+    path: '/MijnLaak',
+    element: <MijnLaak />
   },
 ];
 
