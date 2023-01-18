@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ORM;
-using Microsoft.AspNetCore.Mvc;
-
+using Project2.Data;
 
 namespace MyApp.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
     public class HallController : ControllerBase

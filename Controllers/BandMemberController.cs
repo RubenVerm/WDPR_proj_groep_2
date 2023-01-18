@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ORM;
-
+using Project2.Data;
 namespace MyApp.Controllers
 {
     [Route("api/[controller]")]

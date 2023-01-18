@@ -1,8 +1,0 @@
-{
-"SpaProxyServer": {
-"ServerUrl": "https://localhost:44433",
-"LaunchCommand": "npm start",
-"WorkingDirectory": "C:\\Users\\ruben\\Documents\\School\\WDPR\\MyApp\\MyApp\\ClientApp\\",
-"MaxTimeoutInSeconds": "120"
-}
-}
