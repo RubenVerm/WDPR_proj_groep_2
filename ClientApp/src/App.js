@@ -1,22 +1,17 @@
-import React, { Component } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import AppRoutes from './AppRoutes';
-import { Layout } from './components/Layout';
-import './custom.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-export default class App extends Component {
-  static displayName = App.name;
+import Home from './pages/Home';
 
-  render() {
-    return (
-      <Layout>
-        <Routes>
-          {AppRoutes.map((route, index) => {
-            const { element, ...rest } = route;
-            return <Route key={index} {...rest} element={element} />;
-          })}
-        </Routes>
-      </Layout>
-    );
-  }
+
+const App = () => {
+  return (
+    <div>
+      <Home />
+    </div>
+
+  );
 }
+ReactDOM.render(<App />, document.getElementById('root'));
+
+export default App;
