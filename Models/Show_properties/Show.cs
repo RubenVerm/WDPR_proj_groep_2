@@ -15,16 +15,15 @@ namespace ORM
     public int Duration { get; set; }
     public DateTime ShowDate { get; set; }
 
-
-
-
     // Navigation property
     [ForeignKey("BandId")]
-    public virtual Band Band { get; set; }
+    public virtual Band? Band { get; set; }
     [ForeignKey("HallId")]
     public virtual Hall? Hall { get; set; }
     [ForeignKey("RoomId")]
     public virtual Room? Room { get; set; }
 
+    
+  public ICollection<Agenda> Agendas { get; set; }
   }
 }

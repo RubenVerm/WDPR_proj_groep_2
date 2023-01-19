@@ -62,7 +62,7 @@ namespace MyApp.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHall(int id, Hall hall)
         {
-            if (id != hall.HalldId)
+            if (id != hall.HallId)
             {
                 return BadRequest();
             }
@@ -100,7 +100,7 @@ namespace MyApp.Controllers
             _context.Halls.Add(hall);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetHall", new { id = hall.HalldId }, hall);
+            return CreatedAtAction("GetHall", new { id = hall.HallId }, hall);
         }
 
         // DELETE: api/Hall/5
@@ -125,7 +125,7 @@ namespace MyApp.Controllers
 
         private bool HallExists(int id)
         {
-            return (_context.Halls?.Any(e => e.HalldId == id)).GetValueOrDefault();
+            return (_context.Halls?.Any(e => e.HallId == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,17 +1,16 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Project2.Data;
 using Project2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-var connectionString = "Server=RUBEN\\SQLEXPRESS;Database=TestDb3;Integrated Security=True; TrustServerCertificate=True;";
+var connectionString = "Server=RUBEN\\SQLEXPRESS;Database=TestDb2;Integrated Security=True; TrustServerCertificate=True;";
 
 // Add services to the container.
 builder.Services.AddDbContext<TheaterContext>(options =>
-    options.UseSqlServer(connectionString));
+     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)

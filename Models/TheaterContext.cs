@@ -14,6 +14,11 @@ namespace Project2.Data
 
         }
         // items
+        public DbSet<Actor> Actors { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Agenda> Agendas { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
         public DbSet<Hall> Halls { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Band> Bands { get; set; }

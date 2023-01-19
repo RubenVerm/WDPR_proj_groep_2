@@ -12,6 +12,20 @@ namespace Project2.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Actors",
+                columns: table => new
+                {
+                    ActorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Actors", x => x.ActorId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -30,6 +44,9 @@ namespace Project2.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -87,7 +104,7 @@ namespace Project2.Migrations
                 name: "Halls",
                 columns: table => new
                 {
-                    HalldId = table.Column<int>(type: "int", nullable: false)
+                    HallId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstClassSeats = table.Column<int>(type: "int", nullable: true),
@@ -96,7 +113,7 @@ namespace Project2.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Halls", x => x.HalldId);
+                    table.PrimaryKey("PK_Halls", x => x.HallId);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,6 +275,45 @@ namespace Project2.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Baskets",
+                columns: table => new
+                {
+                    Basketid = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Baskets", x => x.Basketid);
+                    table.ForeignKey(
+                        name: "FK_Baskets_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BandMembers",
                 columns: table => new
                 {
@@ -289,30 +345,119 @@ namespace Project2.Migrations
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
                     ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BandId = table.Column<int>(type: "int", nullable: false),
+                    BandId = table.Column<int>(type: "int", nullable: true),
                     HallId = table.Column<int>(type: "int", nullable: true),
-                    RoomId = table.Column<int>(type: "int", nullable: true)
+                    RoomId = table.Column<int>(type: "int", nullable: true),
+                    ActorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Shows", x => x.ShowId);
                     table.ForeignKey(
+                        name: "FK_Shows_Actors_ActorId",
+                        column: x => x.ActorId,
+                        principalTable: "Actors",
+                        principalColumn: "ActorId");
+                    table.ForeignKey(
                         name: "FK_Shows_Bands_BandId",
                         column: x => x.BandId,
                         principalTable: "Bands",
-                        principalColumn: "BandId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "BandId");
                     table.ForeignKey(
                         name: "FK_Shows_Halls_HallId",
                         column: x => x.HallId,
                         principalTable: "Halls",
-                        principalColumn: "HalldId");
+                        principalColumn: "HallId");
                     table.ForeignKey(
                         name: "FK_Shows_Rooms_RoomId",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "RoomId");
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Agendas",
+                columns: table => new
+                {
+                    Agendaid = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ShowId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Agendas", x => x.Agendaid);
+                    table.ForeignKey(
+                        name: "FK_Agendas_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Agendas_Shows_ShowId",
+                        column: x => x.ShowId,
+                        principalTable: "Shows",
+                        principalColumn: "ShowId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tickets",
+                columns: table => new
+                {
+                    TicketId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Rownumber = table.Column<int>(type: "int", nullable: false),
+                    Seatnumber = table.Column<int>(type: "int", nullable: false),
+                    ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    HallId = table.Column<int>(type: "int", nullable: false),
+                    ShowId = table.Column<int>(type: "int", nullable: false),
+                    Basketid = table.Column<int>(type: "int", nullable: true),
+                    OrderId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tickets", x => x.TicketId);
+                    table.ForeignKey(
+                        name: "FK_Tickets_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Tickets_Baskets_Basketid",
+                        column: x => x.Basketid,
+                        principalTable: "Baskets",
+                        principalColumn: "Basketid");
+                    table.ForeignKey(
+                        name: "FK_Tickets_Halls_HallId",
+                        column: x => x.HallId,
+                        principalTable: "Halls",
+                        principalColumn: "HallId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Tickets_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId");
+                    table.ForeignKey(
+                        name: "FK_Tickets_Shows_ShowId",
+                        column: x => x.ShowId,
+                        principalTable: "Shows",
+                        principalColumn: "ShowId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Agendas_CustomerId",
+                table: "Agendas",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Agendas_ShowId",
+                table: "Agendas",
+                column: "ShowId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -359,6 +504,11 @@ namespace Project2.Migrations
                 column: "BandId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Baskets_CustomerId",
+                table: "Baskets",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
                 table: "DeviceCodes",
                 column: "DeviceCode",
@@ -373,6 +523,11 @@ namespace Project2.Migrations
                 name: "IX_Keys_Use",
                 table: "Keys",
                 column: "Use");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_CustomerId",
+                table: "Orders",
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersistedGrants_ConsumedTime",
@@ -395,6 +550,11 @@ namespace Project2.Migrations
                 columns: new[] { "SubjectId", "SessionId", "Type" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Shows_ActorId",
+                table: "Shows",
+                column: "ActorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Shows_BandId",
                 table: "Shows",
                 column: "BandId");
@@ -408,11 +568,39 @@ namespace Project2.Migrations
                 name: "IX_Shows_RoomId",
                 table: "Shows",
                 column: "RoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_Basketid",
+                table: "Tickets",
+                column: "Basketid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_CustomerId",
+                table: "Tickets",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_HallId",
+                table: "Tickets",
+                column: "HallId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_OrderId",
+                table: "Tickets",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_ShowId",
+                table: "Tickets",
+                column: "ShowId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Agendas");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -441,13 +629,25 @@ namespace Project2.Migrations
                 name: "PersistedGrants");
 
             migrationBuilder.DropTable(
-                name: "Shows");
+                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Baskets");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Shows");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Actors");
 
             migrationBuilder.DropTable(
                 name: "Bands");

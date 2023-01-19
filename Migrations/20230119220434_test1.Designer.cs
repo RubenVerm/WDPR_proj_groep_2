@@ -12,7 +12,7 @@ using Project2.Data;
 namespace Project2.Migrations
 {
     [DbContext(typeof(TheaterContext))]
-    [Migration("20230118172427_test1")]
+    [Migration("20230119220434_test1")]
     partial class test1
     {
         /// <inheritdoc />
@@ -303,6 +303,51 @@ namespace Project2.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ORM.Actor", b =>
+                {
+                    b.Property<int>("ActorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActorId"));
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ActorId");
+
+                    b.ToTable("Actors");
+                });
+
+            modelBuilder.Entity("ORM.Agenda", b =>
+                {
+                    b.Property<int>("Agendaid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Agendaid"));
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("ShowId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Agendaid");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("ShowId");
+
+                    b.ToTable("Agendas");
+                });
+
             modelBuilder.Entity("ORM.Band", b =>
                 {
                     b.Property<int>("BandId")
@@ -350,13 +395,32 @@ namespace Project2.Migrations
                     b.ToTable("BandMembers");
                 });
 
-            modelBuilder.Entity("ORM.Hall", b =>
+            modelBuilder.Entity("ORM.Basket", b =>
                 {
-                    b.Property<int>("HalldId")
+                    b.Property<int>("Basketid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HalldId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Basketid"));
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Basketid");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Baskets");
+                });
+
+            modelBuilder.Entity("ORM.Hall", b =>
+                {
+                    b.Property<int>("HallId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HallId"));
 
                     b.Property<int?>("FirstClassSeats")
                         .HasColumnType("int");
@@ -371,9 +435,31 @@ namespace Project2.Migrations
                     b.Property<int?>("ThirdClassSeats")
                         .HasColumnType("int");
 
-                    b.HasKey("HalldId");
+                    b.HasKey("HallId");
 
                     b.ToTable("Halls");
+                });
+
+            modelBuilder.Entity("ORM.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ORM.Room", b =>
@@ -404,7 +490,10 @@ namespace Project2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShowId"));
 
-                    b.Property<int>("BandId")
+                    b.Property<int?>("ActorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BandId")
                         .HasColumnType("int");
 
                     b.Property<int>("Duration")
@@ -433,6 +522,8 @@ namespace Project2.Migrations
 
                     b.HasKey("ShowId");
 
+                    b.HasIndex("ActorId");
+
                     b.HasIndex("BandId");
 
                     b.HasIndex("HallId");
@@ -440,6 +531,57 @@ namespace Project2.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("Shows");
+                });
+
+            modelBuilder.Entity("ORM.Ticket", b =>
+                {
+                    b.Property<int>("TicketId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketId"));
+
+                    b.Property<int?>("Basketid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("HallId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Rownumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Seatnumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ShowDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ShowId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TicketId");
+
+                    b.HasIndex("Basketid");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("HallId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ShowId");
+
+                    b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("Project2.Models.ApplicationUser", b =>
@@ -454,12 +596,21 @@ namespace Project2.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -558,6 +709,21 @@ namespace Project2.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ORM.Agenda", b =>
+                {
+                    b.HasOne("Project2.Models.ApplicationUser", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ORM.Show", null)
+                        .WithMany("Agendas")
+                        .HasForeignKey("ShowId");
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("ORM.BandMember", b =>
                 {
                     b.HasOne("ORM.Band", "Band")
@@ -569,13 +735,37 @@ namespace Project2.Migrations
                     b.Navigation("Band");
                 });
 
-            modelBuilder.Entity("ORM.Show", b =>
+            modelBuilder.Entity("ORM.Basket", b =>
                 {
-                    b.HasOne("ORM.Band", "Band")
-                        .WithMany("Shows")
-                        .HasForeignKey("BandId")
+                    b.HasOne("Project2.Models.ApplicationUser", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("ORM.Order", b =>
+                {
+                    b.HasOne("Project2.Models.ApplicationUser", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("ORM.Show", b =>
+                {
+                    b.HasOne("ORM.Actor", null)
+                        .WithMany("Shows")
+                        .HasForeignKey("ActorId");
+
+                    b.HasOne("ORM.Band", "Band")
+                        .WithMany("Shows")
+                        .HasForeignKey("BandId");
 
                     b.HasOne("ORM.Hall", "Hall")
                         .WithMany("Shows")
@@ -592,6 +782,46 @@ namespace Project2.Migrations
                     b.Navigation("Room");
                 });
 
+            modelBuilder.Entity("ORM.Ticket", b =>
+                {
+                    b.HasOne("ORM.Basket", null)
+                        .WithMany("Tickets")
+                        .HasForeignKey("Basketid");
+
+                    b.HasOne("Project2.Models.ApplicationUser", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ORM.Hall", "hall")
+                        .WithMany()
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ORM.Order", null)
+                        .WithMany("Tickets")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("ORM.Show", "Show")
+                        .WithMany()
+                        .HasForeignKey("ShowId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Show");
+
+                    b.Navigation("hall");
+                });
+
+            modelBuilder.Entity("ORM.Actor", b =>
+                {
+                    b.Navigation("Shows");
+                });
+
             modelBuilder.Entity("ORM.Band", b =>
                 {
                     b.Navigation("BandMembers");
@@ -599,14 +829,29 @@ namespace Project2.Migrations
                     b.Navigation("Shows");
                 });
 
+            modelBuilder.Entity("ORM.Basket", b =>
+                {
+                    b.Navigation("Tickets");
+                });
+
             modelBuilder.Entity("ORM.Hall", b =>
                 {
                     b.Navigation("Shows");
                 });
 
+            modelBuilder.Entity("ORM.Order", b =>
+                {
+                    b.Navigation("Tickets");
+                });
+
             modelBuilder.Entity("ORM.Room", b =>
                 {
                     b.Navigation("Shows");
+                });
+
+            modelBuilder.Entity("ORM.Show", b =>
+                {
+                    b.Navigation("Agendas");
                 });
 #pragma warning restore 612, 618
         }
