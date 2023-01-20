@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import AppRoutes from './AppRoutes';
 
 import Home from './pages/Home';
 
@@ -7,7 +8,7 @@ import Home from './pages/Home';
 const App = () => {
   return (
     <div>
-      <Home />
+      <AppRoutes />
     </div>
 
   );
