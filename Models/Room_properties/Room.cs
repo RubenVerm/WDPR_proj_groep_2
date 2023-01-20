@@ -13,7 +13,8 @@ public class Room
   public int Capacity { get; set; }
 
   //Tussentabel met zaalnummer en shownummer
-  public ICollection<Show> Shows { get; set; }
+  public ICollection<Show>? Shows { get; set; }
+  public ICollection<Ticket>? Tickets { get; set; }
 
 }
 }

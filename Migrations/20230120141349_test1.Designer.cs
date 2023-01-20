@@ -12,7 +12,7 @@ using Project2.Data;
 namespace Project2.Migrations
 {
     [DbContext(typeof(TheaterContext))]
-    [Migration("20230119220434_test1")]
+    [Migration("20230120141349_test1")]
     partial class test1
     {
         /// <inheritdoc />
@@ -377,7 +377,8 @@ namespace Project2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BandId")
+                    b.Property<int?>("BandId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -494,6 +495,7 @@ namespace Project2.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("BandId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("Duration")
@@ -504,19 +506,17 @@ namespace Project2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("HallId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("RoomId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ShowDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ShowName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TypeShow")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -548,14 +548,17 @@ namespace Project2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("HallId")
+                    b.Property<int?>("HallId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("RoomId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Rownumber")
                         .HasColumnType("int");
@@ -578,6 +581,8 @@ namespace Project2.Migrations
                     b.HasIndex("HallId");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("RoomId");
 
                     b.HasIndex("ShowId");
 
@@ -749,9 +754,9 @@ namespace Project2.Migrations
             modelBuilder.Entity("ORM.Order", b =>
                 {
                     b.HasOne("Project2.Models.ApplicationUser", "Customer")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -759,21 +764,29 @@ namespace Project2.Migrations
 
             modelBuilder.Entity("ORM.Show", b =>
                 {
-                    b.HasOne("ORM.Actor", null)
+                    b.HasOne("ORM.Actor", "Actor")
                         .WithMany("Shows")
                         .HasForeignKey("ActorId");
 
                     b.HasOne("ORM.Band", "Band")
                         .WithMany("Shows")
-                        .HasForeignKey("BandId");
+                        .HasForeignKey("BandId")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
 
                     b.HasOne("ORM.Hall", "Hall")
                         .WithMany("Shows")
-                        .HasForeignKey("HallId");
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
 
                     b.HasOne("ORM.Room", "Room")
                         .WithMany("Shows")
-                        .HasForeignKey("RoomId");
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
+
+                    b.Navigation("Actor");
 
                     b.Navigation("Band");
 
@@ -789,32 +802,42 @@ namespace Project2.Migrations
                         .HasForeignKey("Basketid");
 
                     b.HasOne("Project2.Models.ApplicationUser", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ORM.Hall", "hall")
-                        .WithMany()
-                        .HasForeignKey("HallId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ORM.Order", null)
                         .WithMany("Tickets")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
+
+                    b.HasOne("ORM.Hall", "Hall")
+                        .WithMany("Tickets")
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.ClientNoAction);
+
+                    b.HasOne("ORM.Order", "Order")
+                        .WithMany("Tickets")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
+
+                    b.HasOne("ORM.Room", "Room")
+                        .WithMany("Tickets")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.ClientNoAction);
 
                     b.HasOne("ORM.Show", "Show")
-                        .WithMany()
+                        .WithMany("Tickets")
                         .HasForeignKey("ShowId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
                     b.Navigation("Customer");
 
-                    b.Navigation("Show");
+                    b.Navigation("Hall");
 
-                    b.Navigation("hall");
+                    b.Navigation("Order");
+
+                    b.Navigation("Room");
+
+                    b.Navigation("Show");
                 });
 
             modelBuilder.Entity("ORM.Actor", b =>
@@ -837,6 +860,8 @@ namespace Project2.Migrations
             modelBuilder.Entity("ORM.Hall", b =>
                 {
                     b.Navigation("Shows");
+
+                    b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("ORM.Order", b =>
@@ -847,11 +872,22 @@ namespace Project2.Migrations
             modelBuilder.Entity("ORM.Room", b =>
                 {
                     b.Navigation("Shows");
+
+                    b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("ORM.Show", b =>
                 {
                     b.Navigation("Agendas");
+
+                    b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("Project2.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }

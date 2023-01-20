@@ -13,7 +13,7 @@ export class Overons extends Component {
 
   componentDidMount() {
     axios
-      .get("https://localhost:7092/api/Hall")
+      .get("https://localhost:7113/api/Hall")
       .then((response) => {
         this.setState({ halls: response.data });
       })

@@ -3,10 +3,11 @@ import { Home } from "./components/Web/Home";
 import { Agenda } from "./components/Web/Agenda";
 import { Huren } from "./components/Web/Huren";
 import { Tickets } from "./components/Web/Tickets";
-import { Dontaties } from "./components/Web/Dontaties";
+import { Donaties } from "./components/Web/Donaties";
 import { Overons } from "./components/Web/Overons";
 import { Contact } from"./components/Web/Contact";
 import { MijnLaak } from"./components/Web/MijnLaak";
+import { ShowPage } from"./components/Web/ShowPage";
 
 const AppRoutes = [
   
@@ -30,9 +31,9 @@ const AppRoutes = [
     element: <Huren />
   },
   {
-    path: '/Dontaties',
+    path: '/Donaties',
     requireAuth: true,
-    element: <Dontaties />
+    element: <Donaties />
   },
   {
     path: '/Overons',
@@ -46,6 +47,10 @@ const AppRoutes = [
     path: '/MijnLaak',
     requireAuth: true,
     element: <MijnLaak />
+  },{
+    path: '/show/:id',
+    requireAuth: true,
+    element: <ShowPage />
   },
   ...ApiAuthorzationRoutes
 ];

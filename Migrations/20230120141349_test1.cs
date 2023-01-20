@@ -309,8 +309,7 @@ namespace Project2.Migrations
                         name: "FK_Orders_AspNetUsers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -340,14 +339,13 @@ namespace Project2.Migrations
                 {
                     ShowId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TypeShow = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ShowName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
                     ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BandId = table.Column<int>(type: "int", nullable: true),
-                    HallId = table.Column<int>(type: "int", nullable: true),
-                    RoomId = table.Column<int>(type: "int", nullable: true),
+                    BandId = table.Column<int>(type: "int", nullable: false),
+                    HallId = table.Column<int>(type: "int", nullable: false),
+                    RoomId = table.Column<int>(type: "int", nullable: false),
                     ActorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -411,10 +409,11 @@ namespace Project2.Migrations
                     Seatnumber = table.Column<int>(type: "int", nullable: false),
                     ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    HallId = table.Column<int>(type: "int", nullable: false),
+                    HallId = table.Column<int>(type: "int", nullable: true),
+                    RoomId = table.Column<int>(type: "int", nullable: true),
                     ShowId = table.Column<int>(type: "int", nullable: false),
-                    Basketid = table.Column<int>(type: "int", nullable: true),
-                    OrderId = table.Column<int>(type: "int", nullable: true)
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    Basketid = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -423,8 +422,7 @@ namespace Project2.Migrations
                         name: "FK_Tickets_AspNetUsers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Tickets_Baskets_Basketid",
                         column: x => x.Basketid,
@@ -434,19 +432,22 @@ namespace Project2.Migrations
                         name: "FK_Tickets_Halls_HallId",
                         column: x => x.HallId,
                         principalTable: "Halls",
-                        principalColumn: "HallId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "HallId");
                     table.ForeignKey(
                         name: "FK_Tickets_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "OrderId");
                     table.ForeignKey(
+                        name: "FK_Tickets_Rooms_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "Rooms",
+                        principalColumn: "RoomId");
+                    table.ForeignKey(
                         name: "FK_Tickets_Shows_ShowId",
                         column: x => x.ShowId,
                         principalTable: "Shows",
-                        principalColumn: "ShowId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ShowId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -588,6 +589,11 @@ namespace Project2.Migrations
                 name: "IX_Tickets_OrderId",
                 table: "Tickets",
                 column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_RoomId",
+                table: "Tickets",
+                column: "RoomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_ShowId",

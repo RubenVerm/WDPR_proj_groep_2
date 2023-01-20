@@ -77,18 +77,30 @@ code {
   border: 1px solid #fff;
   width: 30px;
   height: 30px;
-  display: flex;
   align-items: center;
   justify-content: center;
   margin: 5px;
+  width: 30px;
+  display: inline-block; 
 }
 
-.seat.selected {
-  background-color: #00cc00;
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-select {
-  width: 150px;
-  padding: 10px;
-  margin: 10px;
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  width: 100%;
 }
+
+.seat {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #4CAF50;
+  color: white;
+}
+

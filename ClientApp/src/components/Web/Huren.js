@@ -1,50 +1,55 @@
-import React from 'react';
+import React, { Component } from "react";
+import axios from "axios";
+import moment from "moment";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
+export class Huren extends Component {
+  state = {
+    shows: []
+  };
 
-export class Huren extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        Halls: []
-    }
-}
-  
   componentDidMount() {
-    fetch("https://localhost:7113/api/Hall")
-    .then(res => res.json())
-    .then(
-        (halls) => {
-            this.setState({ Halls: halls });
-        },
-        (error) => {
-            alert(error);
-        }
-    )
-}
+    axios
+      .get("https://localhost:7113/api/Show")
+      .then((res) => this.setState({ shows: res.data }))
+      .catch((err) => console.log(err));
+  }
+
   render() {
-    return (
-      <table className='styled-table'>
-        <thead>
-          <tr>         
-          <th>Zaalnummer</th>
-          <th>Voorstellingen</th>
-          <th>Eersterangs stoelen</th>
-          <th>Tweederangs stoelen</th>
-          <th>Derderangs stoelen</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.Halls.map(item => (
-            <tr key={item.halldId} className='active-row'>
-            <td>{item.name}</td>
-            <td>{item.shows}</td>
-            <td>{item.firstClassSeats}</td>
-            <td>{item.secondClassSeats}</td>
-            <td>{item.thirdClassSeats}</td>
-          </tr>
-          ))}
-        </tbody>
-      </table>
+    const today = moment().format("YYYY-MM-DD");
+    const shows = this.state.shows.filter(
+      (show) => moment(show.release_date).isSameOrAfter(today)
     );
+
+    return (
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Release Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {shows.map((show) => (
+              <tr key={show.showId}>
+                <td>{show.showName}</td>
+                <td>{show.genre}</td>
+                <td>{show.showDate}</td>
+                <td>
+                  <Link to={`/show/${show.showId}`}>See Dates</Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }
-}
+
+
+
+

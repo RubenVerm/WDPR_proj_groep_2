@@ -6,7 +6,7 @@ using Project2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-var connectionString = "Server=RUBEN\\SQLEXPRESS;Database=TestDb2;Integrated Security=True; TrustServerCertificate=True;";
+var connectionString = "Server=RUBEN\\SQLEXPRESS;Database=TestDb3;Integrated Security=True; TrustServerCertificate=True;";
 
 // Add services to the container.
 builder.Services.AddDbContext<TheaterContext>(options =>
