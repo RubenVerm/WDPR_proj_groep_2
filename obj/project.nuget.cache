@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uFy7LBsD4dsZDr6BsX9ZEw2kA5vbd5IlAnFpSJz6ytmI6d1LIkjyYWHANqpPsRrPGoRIJfU2soZHAnM24VHPhQ==",
+  "dgSpecHash": "yMGHD60PAnRbeX5/mxh4mYpd9r4EoayqgcK1Soot3fV1L1XUAzWIYEmCJmLhFV+VOZT2v+GlH2ZdO6XKxnc63g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\Project2.csproj",
+  "projectFilePath": "c:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\Project2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ruben\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\ruben\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
