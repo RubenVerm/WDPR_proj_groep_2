@@ -26,10 +26,10 @@ const idDonatie ={
 
 
 // JWT voor dev
-const jwtDev = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMzM0MGVlOC00YjM5LTRjY2QtYTM2Mi1mODhjYzcwYzk2N2IiLCJqdGkiOiIyOTJmYzI1ZC1jMDQ5LTQyNTYtODA3OC03ZWZlODIyYzJhMzgiLCJpYXQiOiIwMS8yMi8yMDIzIDE5OjQ0OjE4IiwiVXNlcklkIjoiZTMzNDBlZTgtNGIzOS00Y2NkLWEzNjItZjg4Y2M3MGM5NjdiIiwiRW1haWwiOiIyMTAzMjI0NkBzdHVkZW50Lmhocy5ubCIsImV4cCI6MTk5MDAzNTg1OCwiaXNzIjoiSWtEb25lZXIiLCJhdWQiOiIqIn0.ueMyi_y_1F36n-gw9ONy8MFe5296sp6AdR_nMlwVPOE';
+const jwtDev = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1MWIwNzZjOS05NDc5LTQ3MzItYjdkOS00ZjJhOTgzZDdlMDYiLCJqdGkiOiI4MTQ0ZWY4Ny00OTU3LTQ0MDctYTVhNi0zMDJlMjhiMTRlM2MiLCJpYXQiOiIwMS8yMi8yMDIzIDAwOjA2OjIzIiwiVXNlcklkIjoiNTFiMDc2YzktOTQ3OS00NzMyLWI3ZDktNGYyYTk4M2Q3ZTA2IiwiRW1haWwiOiJwYW5kYXdvbGZnYW1lc0BnbWFpbC5jb20iLCJleHAiOjE5ODk5NjUxODMsImlzcyI6IklrRG9uZWVyIiwiYXVkIjoiKiJ9.66G-Db-1Pa8qPcSXWIvDYkGoqa_fKqp1UUO6FgWMqsk';
 
 // Authenticate and retrieve JWT           Weet niet of diet goed is
-axios.post('https://ikdoneer.azurewebsites.net/api/22', credentials)
+axios.post('https://your-api-provider.com/authenticate', credentials)
   .then(response => {
     const jwt = response.data.jwt;
     // Save the JWT in memory, or in a secure location such as a server-side session.
