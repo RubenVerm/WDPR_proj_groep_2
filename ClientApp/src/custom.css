@@ -1,4 +1,6 @@
 /* Provide sufficient contrast against white background */
+
+
 a {
   color: #0366d6;
 }
@@ -18,6 +20,8 @@ code {
 }
 
 /* Table styling */
+
+
 .styled-table {
   border-collapse: collapse;
   margin: 25px 0;
