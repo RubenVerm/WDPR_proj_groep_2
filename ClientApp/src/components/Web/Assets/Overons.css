@@ -1,8 +1,4 @@
 .section-flex-box {
-    /* Next 3 lines are for dev purposes only */
-    border-color: black;
-    border:4px;
-    border-style: solid;
     height: 45vh;
     margin-bottom: 7vh;
     display: flex;
