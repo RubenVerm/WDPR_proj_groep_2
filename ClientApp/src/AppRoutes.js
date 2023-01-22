@@ -27,7 +27,7 @@ const AppRoutes = [
   },
   {
     path: '/Huren',
-    requireAuth: true,
+    //TODO: REMOVED requireAuth
     element: <Huren />
   },
   {

@@ -1,0 +1,21 @@
+.section-flex-box {
+    /* Next 3 lines are for dev purposes only */
+    border-color: black;
+    border:4px;
+    border-style: solid;
+    height: 45vh;
+    margin-bottom: 7vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#hr1 {
+    height: 0.3vh;
+    width: 25vw;
+    padding: 0px;
+    margin: 0px; 
+    background-color: black;
+    border-radius: 15px;    
+}

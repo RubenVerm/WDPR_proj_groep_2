@@ -1,160 +1,61 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import './Assets/Overons.css';
+import './Assets/Home.css';
+import { NavMenu } from '../NavMenu';
+import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export class Overons extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedHall: "",
-      halls: [],
-      selectedSeats: [],
-    };
-  }
-
-  componentDidMount() {
-    axios
-      .get("https://localhost:7113/api/Hall")
-      .then((response) => {
-        this.setState({ halls: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  handleHallChange = (e) => {
-    this.setState({ selectedHall: e.target.value });
-  };
-
-  handleSeatClick = (seat) => {
-    if (this.state.selectedSeats.includes(seat)) {
-      this.setState({
-        selectedSeats: this.state.selectedSeats.filter((s) => s !== seat),
-      });
-    } else {
-      this.setState({
-        selectedSeats: [...this.state.selectedSeats, seat],
-      });
-    }
-  };
-
-  handleSubmit = () => {
-    // Send the selected seats to the shopping cart here
-    console.log("Selected seats: ", this.state.selectedSeats);
-  };
-
-  renderSeats() {
-    let seats = [];
-    if(this.state.selectedHall) {
-    let hall = this.state.halls.find((h) => h.name === this.state.selectedHall);
-    if(hall){
-      for (let row = 1; row <= 3; row++) {
-        let seatsPerRow = hall["thirdClassSeats"];
-        if (row === 1) {
-          seatsPerRow = hall["firstClassSeats"];
-        } else if (row === 2) {
-          seatsPerRow = hall["secondClassSeats"];
-        }
-        for (let seat = 1; seat <= seatsPerRow; seat++) {
-          seats.push(
-            <div
-              key={`${row}-${seat}`}
-              className={`seat ${
-                this.state.selectedSeats.includes(`${row}-${seat}`)
-                  ? "selected"
-                  : ""
-              }`}
-              onClick={() => this.handleSeatClick(`${row}-${seat}`)}
-            >
-              {row}-{seat}
-            </div>
-          );
-        }
-      }
-    }
-    }
-    return seats;
-  }
+  static displayName = Overons.name;
 
   render() {
     return (
-      <div className="seats-selection">
-        <div>
-          <label>
-            Hall:
-            <select value={this.state.selectedHall} onChange={this.handleHallChange}>
-              <option value=""></option>
-              {this.state.halls.map((h) => (
-                <option value={h.name} key={h.name}>
-                  {h.name}
-                </option>
-              ))}
-            </select>
-          </label>
+      <div>
+        <NavMenu />
+
+        <div className='section-flex-box'>
+          <div className='section-block'>
+            <img className='section-image' src={require("./Media/v169_162.png")} />
+
+          </div>
+          <div className='section-block'>
+            <h2> Over Laaktheater </h2>
+            <hr id='hr1'></hr>
+            <p>
+              Laaktheater probeert kunst persoonlijk te maken. Dat betekent dat we kunst op zo veel verschillende manieren brengen dat er voor iedereen een  mogelijkheid is het zich eigen te maken en te beleven. Dat kunt niet eng is of niet voor jou, maar dat kunst echt voor en van iedereen is. Als je maar een manier vindt of krijgt die bij je past.
+            </p>
+          </div>
         </div>
-        <div className="seats-grid-horizontal" >
-          {this.state.halls
-            .filter((h) => h.name === this.state.selectedHall)
-            .map((hall) => (
-              <div key={hall.hallId} className="seats-grid-row-horizontal">
-                <div className="first-class-seats-horizontal">
-                  <div className="row-label-horizontal">First Class Seats</div>
-                  {[...Array(hall["firstClassSeats"])].map((seat, index) => (
-                    <div
-                      key={`1-${index + 1}`}
-                      className={`seat ${
-                        this.state.selectedSeats.includes(`1-${index + 1}`)
-                          ? "selected"
-                          : ""
-                      }`}
-                      onClick={() => this.handleSeatClick(`1-${index + 1}`)}
-                    >
-                      {index + 1}
-                    </div>
-                  ))}
-                </div>
-                <div className="second-class-seats-horizontal">
-                  <div className="row-label-horizontal">Second Class Seats                  </div>
-                  {[...Array(hall["secondClassSeats"])].map((seat, index) => (
-                    <div
-                      key={`2-${index + 1}`}
-                      className={`seat ${
-                        this.state.selectedSeats.includes(`2-${index + 1}`)
-                          ? "selected"
-                          : ""
-                      }`}
-                      onClick={() => this.handleSeatClick(`2-${index + 1}`)}
-                    >
-                      {index + 1}
-                    </div>
-                  ))}
-                </div>
-                <div className="third-class-seats-horizontal">
-                  <div className="row-label-horizontal">Third Class Seats</div>
-                  {[...Array(hall["thirdClassSeats"])].map((seat, index) => (
-                    <div
-                      key={`3-${index + 1}`}
-                      className={`seat ${
-                        this.state.selectedSeats.includes(`3-${index + 1}`)
-                          ? "selected"
-                          : ""
-                      }`}
-                      onClick={() => this.handleSeatClick(`3-${index + 1}`)}
-                    >
-                      {index + 1}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+
+        <div className='section-flex-box'>
+          <div className='section-block'>
+            <h2> Samen Programma Maken</h2>
+            <hr id='hr1'></hr>
+            <p>
+              Laaktheater is uniek. Wij maken ons programma samen met de wijkbewoners uit Laak. Samen met mensen die hun liefde voor cultuur willen delen. Hun liefde voor film, fotografie, (jeugd)theater of muziek. Mensen met een idee kunnen gewoon binnenlopen. Wij kijken dan samen hoe we dat idee, die wens of droom waar kunnen maken.
+            </p>
+          </div>
+          <div className='section-block'>
+            <img className='section-image' src={require("./Media/v51_13.png")} />
+          </div>
         </div>
-        <div>
-          <button onClick={this.handleSubmit}>Add to cart</button>
+
+        <div className='section-flex-box'>
+          <div className='section-block'>
+            <img className='section-image' src={require("./Media/v54_19.png")} />
+          </div>
+          <div className='section-block'>
+            <h2> Laaktheater Huren?</h2>
+            <hr id='hr1'></hr>
+            <p>
+              Laaktheater wordt veel verhuurd vanwage de intieme sfeer en het persoonlijk contact met het publiek. Kunstenaars geven in onze studio’s individuele of groepslessen. In de foyer smeden bewoners culture plannen. En maatschappelijke organisaties en bedrijven weten de weg naar ons theater te vinden voor hun seminars, evenementen en congressen. Dus zoek je een bijzondere locatie om een cultureel evenement, vergadering, lezing of workshop te organiseren? Dan ben je in Laaktheater aan het goede adres!
+            </p>
+          </div>
         </div>
+
       </div>
     );
   }
-
 
 
 }

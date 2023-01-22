@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
+import './Assets/Huren.css';
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import { NavMenu } from "../NavMenu";
 
 export class Huren extends Component {
   state = {
@@ -23,28 +25,31 @@ export class Huren extends Component {
 
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Genre</th>
-              <th>Release Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {shows.map((show) => (
-              <tr key={show.showId}>
-                <td>{show.showName}</td>
-                <td>{show.genre}</td>
-                <td>{show.showDate}</td>
-                <td>
-                  <Link to={`/show/${show.showId}`}>See Dates</Link>
-                </td>
+        <NavMenu></NavMenu>
+        <div id='show-flex-container'>
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Release Date</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {shows.map((show) => (
+                <tr key={show.showId}>
+                  <td>{show.showName}</td>
+                  <td>{show.genre}</td>
+                  <td>{show.showDate}</td>
+                  <td>
+                    <Link to={`/show/${show.showId}`}>See Dates</Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
