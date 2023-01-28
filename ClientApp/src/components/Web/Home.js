@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Assets/Home.css';
-import { NavMenu } from '../NavMenu';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -11,14 +10,12 @@ export class Home extends Component {
   render() {
     return (
       <div>
-
         <div className="image-container">
           <img id="main-image" src={require("./Media/v7_6.png")} />
           <div class="centered">Theater Laak</div>
         </div>
 
         <hr id="hr1"></hr>
-        <NavMenu />
 
 
         <div id="text-container-1">

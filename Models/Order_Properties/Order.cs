@@ -3,19 +3,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Project2.Models;
 namespace ORM
 {
-public class Order
-{
-  [Key]
-  public int OrderId { get; set; }
-  public DateTime OrderDate { get; set; }
-  [Required]
-  public string? CustomerId { get; set; }
+    public class Order
+    {
+        [Key]
+        public int OrderId { get; set; }
 
-  public virtual ApplicationUser Customer { get; set;}
+        public DateTime OrderDate { get; set; }
 
-  //Tickets die de order bevatten
+        [Required]
+        public string? CustomerId { get; set; }
 
-  public ICollection<Ticket> Tickets { get; set; }
-  
-}
+        public string ShowName { get; set; }
+
+        public virtual ApplicationUser Customer { get; set; }
+
+        //Tickets die de order bevatten
+
+        public ICollection<Ticket> Tickets { get; set; }
+
+    }
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import moment from "moment";
 import './Assets/Huren.css';
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import { NavMenu } from "../NavMenu";
+
 
 export class Huren extends Component {
   state = {
@@ -25,14 +25,11 @@ export class Huren extends Component {
 
     return (
       <div>
-        <NavMenu></NavMenu>
         <div id='show-flex-container'>
           <table>
             <thead>
               <tr>
                 <th>Title</th>
-                <th>Genre</th>
-                <th>Release Date</th>
                 <th>Actions</th>
               </tr>
             </thead>

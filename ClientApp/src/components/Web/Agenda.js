@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export class Agenda extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +22,7 @@ export class Agenda extends React.Component {
 }
   render() {
     return (
+      <div>
       <table className='styled-table'>
         <thead>
           <tr>         
@@ -43,6 +43,7 @@ export class Agenda extends React.Component {
           ))}
         </tbody>
       </table>
+      </div>
     );
 }
 }

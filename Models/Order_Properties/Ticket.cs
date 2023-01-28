@@ -4,34 +4,46 @@ using Project2.Models;
 
 namespace ORM
 {
-public class Ticket
-{
-  [Key]
-  public int TicketId { get; set; }
-  private string Ticketcode { get; set; } = Guid.NewGuid().ToString().Substring(0,4);
-  public decimal Price { get; set;} 
-  public int Rownumber {get; set;}
-  public int Seatnumber {get; set;}
+    public class Ticket
+    {
+        [Key]
+        public int TicketId { get; set; }
 
-  public DateTime ShowDate { get; set; }
-  [Required]
-  public string CustomerId { get; set; }
-  public int? HallId { get; set; }
-  public int? RoomId { get; set; }
-  [Required]
-  public int  ShowId { get; set; }
-  [Required]
-  public int  OrderId { get; set; }
+        private string Ticketcode { get; set; } = Guid.NewGuid().ToString().Substring(0, 4);
 
+        public decimal Price { get; set; }
 
+        public string classSeats { get; set;}
 
-  public virtual ApplicationUser Customer { get; set;}
-  public virtual Hall? Hall { get; set; }
-  public virtual Room? Room { get; set; }
+        public int Rownumber { get; set; }
 
-  public virtual Show Show { get; set; }
+        public int Seatnumber { get; set; }
 
-  public virtual Order Order { get; set; }
+        public DateTime ShowDate { get; set; }
 
-}
+        public Boolean available {get; set;}
+
+        [Required]
+        public string CustomerId { get; set; }
+        
+        public int ShoppingCartId { get; set; }
+
+        public int? HallId { get; set; }
+
+        public int? RoomId { get; set; }
+
+        [Required]
+        public int ShowId { get; set; }
+
+        [Required]
+        public int OrderId { get; set; }
+
+        public virtual ShoppingCart ShoppingCart { get; set; }
+        public virtual ApplicationUser Customer { get; set; }
+        public virtual Hall? Hall { get; set; }
+        public virtual Room? Room { get; set; }
+        public virtual Show Show { get; set; }
+        public virtual Order Order { get; set; }
+
+    }
 }

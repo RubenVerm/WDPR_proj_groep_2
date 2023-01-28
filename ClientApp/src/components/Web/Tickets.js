@@ -23,7 +23,8 @@ export class Tickets extends React.Component {
 }
   render() {
     return (
-      <table className='styled-table'>
+      <div>
+        <table className='styled-table'>
         <thead>
           <tr>         
           <th>Zaalnummer</th>
@@ -45,6 +46,8 @@ export class Tickets extends React.Component {
           ))}
         </tbody>
       </table>
+      </div>
+      
     );
 }
 }

@@ -6,7 +6,7 @@ using Project2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-var connectionString = "Server=RUBEN\\SQLEXPRESS;Database=TestDb3;Integrated Security=True; TrustServerCertificate=True;";
+var connectionString = "Server=RUBEN\\SQLEXPRESS;Database=TestDb;Integrated Security=True; TrustServerCertificate=True;";
 
 // Add services to the container.
 builder.Services.AddDbContext<TheaterContext>(options =>
@@ -28,12 +28,17 @@ builder.Services.AddCors(options =>
                       policy  =>
                       {
                           policy.WithOrigins("https://localhost:7113",
+                                            "https://localhost",
                                               "https://localhost:44437");
                       });
 });
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+
+//proceed
+
 
 
 builder.Services.Configure<IdentityOptions>(options =>
@@ -89,6 +94,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseIdentityServer();
 app.UseAuthorization();
+
 app.UseCors(MyAllowSpecificOrigins);
 app.MapControllerRoute(
     name: "default",

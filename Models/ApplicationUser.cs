@@ -9,7 +9,7 @@ namespace Project2.Models
     {
 
         [Key]
-        public string CustomerId { get; set; } = Guid.NewGuid().ToString().Substring(0,4);
+        public string CustomerId { get; set; } = Guid.NewGuid().ToString().Substring(0, 4);
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public ICollection<Ticket> Tickets { get; set; }

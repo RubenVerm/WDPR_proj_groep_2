@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Assets/Overons.css';
 import './Assets/Home.css';
-import { NavMenu } from '../NavMenu';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +10,6 @@ export class Overons extends Component {
   render() {
     return (
       <div>
-        <NavMenu />
 
         <div className='section-flex-box'>
           <div className='section-block'>

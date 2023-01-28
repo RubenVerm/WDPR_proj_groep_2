@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Project2.Migrations
 {
     /// <inheritdoc />
-    public partial class test1 : Migration
+    public partial class test2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -275,32 +275,14 @@ namespace Project2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Baskets",
-                columns: table => new
-                {
-                    Basketid = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Baskets", x => x.Basketid);
-                    table.ForeignKey(
-                        name: "FK_Baskets_AspNetUsers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ShowName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -310,6 +292,25 @@ namespace Project2.Migrations
                         column: x => x.CustomerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShoppingCarts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -374,31 +375,6 @@ namespace Project2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Agendas",
-                columns: table => new
-                {
-                    Agendaid = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ShowId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Agendas", x => x.Agendaid);
-                    table.ForeignKey(
-                        name: "FK_Agendas_AspNetUsers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Agendas_Shows_ShowId",
-                        column: x => x.ShowId,
-                        principalTable: "Shows",
-                        principalColumn: "ShowId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
@@ -409,11 +385,11 @@ namespace Project2.Migrations
                     Seatnumber = table.Column<int>(type: "int", nullable: false),
                     ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
                     HallId = table.Column<int>(type: "int", nullable: true),
                     RoomId = table.Column<int>(type: "int", nullable: true),
                     ShowId = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    Basketid = table.Column<int>(type: "int", nullable: true)
+                    OrderId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -423,11 +399,6 @@ namespace Project2.Migrations
                         column: x => x.CustomerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Tickets_Baskets_Basketid",
-                        column: x => x.Basketid,
-                        principalTable: "Baskets",
-                        principalColumn: "Basketid");
                     table.ForeignKey(
                         name: "FK_Tickets_Halls_HallId",
                         column: x => x.HallId,
@@ -444,21 +415,16 @@ namespace Project2.Migrations
                         principalTable: "Rooms",
                         principalColumn: "RoomId");
                     table.ForeignKey(
+                        name: "FK_Tickets_ShoppingCarts_ShoppingCartId",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "ShoppingCarts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_Tickets_Shows_ShowId",
                         column: x => x.ShowId,
                         principalTable: "Shows",
                         principalColumn: "ShowId");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Agendas_CustomerId",
-                table: "Agendas",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Agendas_ShowId",
-                table: "Agendas",
-                column: "ShowId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -505,11 +471,6 @@ namespace Project2.Migrations
                 column: "BandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Baskets_CustomerId",
-                table: "Baskets",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
                 table: "DeviceCodes",
                 column: "DeviceCode",
@@ -551,6 +512,11 @@ namespace Project2.Migrations
                 columns: new[] { "SubjectId", "SessionId", "Type" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCarts_CustomerId",
+                table: "ShoppingCarts",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Shows_ActorId",
                 table: "Shows",
                 column: "ActorId");
@@ -569,11 +535,6 @@ namespace Project2.Migrations
                 name: "IX_Shows_RoomId",
                 table: "Shows",
                 column: "RoomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tickets_Basketid",
-                table: "Tickets",
-                column: "Basketid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_CustomerId",
@@ -596,6 +557,11 @@ namespace Project2.Migrations
                 column: "RoomId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tickets_ShoppingCartId",
+                table: "Tickets",
+                column: "ShoppingCartId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tickets_ShowId",
                 table: "Tickets",
                 column: "ShowId");
@@ -604,9 +570,6 @@ namespace Project2.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Agendas");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -641,10 +604,10 @@ namespace Project2.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Baskets");
+                name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "ShoppingCarts");
 
             migrationBuilder.DropTable(
                 name: "Shows");
