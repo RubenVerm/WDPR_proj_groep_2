@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ORM;
 using Project2.Data;
-
+using Microsoft.AspNetCore.Authorization;
 namespace Project2.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase

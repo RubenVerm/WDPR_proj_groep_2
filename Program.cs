@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Project2.Data;
 using Project2.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var connectionString = "Server=RUBEN\\SQLEXPRESS;Database=TestDb;Integrated Security=True; TrustServerCertificate=True;";
 
 // Add services to the container.
@@ -13,7 +15,9 @@ builder.Services.AddDbContext<TheaterContext>(options =>
      options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>
+(options => options.SignIn.RequireConfirmedAccount = true)
+    // .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<TheaterContext>();
 
 builder.Services.AddIdentityServer()
@@ -25,7 +29,7 @@ builder.Services.AddAuthentication()
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy  =>
+                      policy =>
                       {
                           policy.WithOrigins("https://localhost:7113",
                                             "https://localhost",
@@ -36,9 +40,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-
-//proceed
-
+// builder.Services.AddAuthorization(options =>
+// {
+//     options.FallbackPolicy = new AuthorizationPolicyBuilder()
+//         .RequireAuthenticatedUser()
+//         .Build();
+// });
 
 
 builder.Services.Configure<IdentityOptions>(options =>

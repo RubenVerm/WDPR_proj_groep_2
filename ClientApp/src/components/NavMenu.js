@@ -51,15 +51,6 @@ export class NavMenu extends Component {
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/Contact">Contact</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/AdminPageShow">Create Show</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/CreateRole">Create Role</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/AdminPageHall">Config Hall</NavLink>
-              </NavItem>
               <LoginMenu>
               </LoginMenu>
             </ul>

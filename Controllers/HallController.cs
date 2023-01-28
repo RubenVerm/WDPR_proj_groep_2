@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ORM;
 using Project2.Data;
-
+using Microsoft.AspNetCore.Authorization;
 namespace MyApp.Controllers
 {
-
+    [Authorize(Roles = "Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class HallController : ControllerBase

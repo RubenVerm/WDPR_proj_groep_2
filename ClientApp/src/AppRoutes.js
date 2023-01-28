@@ -9,9 +9,6 @@ import { Contact } from"./components/Web/Contact";
 import { MijnLaak } from"./components/Web/MijnLaak";
 import { ShowPage } from"./components/Web/ShowPage";
 
-import {AdminPageShow} from "./components/Admin/AdminPageShow";
-import {CreateRole} from "./components/Admin/CreateRole";
-import {AdminPageHall} from "./components/Admin/AdminPageHall";
 
 const AppRoutes = [
   
@@ -52,21 +49,7 @@ const AppRoutes = [
     requireAuth: true,
     element: <MijnLaak />
   },
-  {
-    path: 'AdminPageShow',
-    requireAuth: true,
-    element: <AdminPageShow />
-  },
-  {
-    path: 'CreateRole',
-    requireAuth: true,
-    element: <CreateRole />
-  },
-  {
-    path: 'AdminPageHall',
-    requireAuth: true,
-    element: <AdminPageHall />
-  },
+
   {
     path: '/show/:id',
     requireAuth: true,
