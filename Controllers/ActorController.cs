@@ -9,7 +9,7 @@ using Project2.Data;
 
 namespace Project2.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ActorController : ControllerBase

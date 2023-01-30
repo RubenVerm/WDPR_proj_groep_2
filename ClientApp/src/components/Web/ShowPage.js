@@ -1,54 +1,101 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate   } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
+
+const Seat = ({ seatNumber, onClick, selected }) => {
+  return (
+    <div
+      style={{
+        backgroundColor: selected ? '#ddd' : '#fff',
+        border: '1px solid #333',
+        width: '40px',
+        height: '40px',
+        display: 'inline-block',
+        margin: '10px',
+        cursor: 'pointer'
+      }}
+      onClick={() => onClick(seatNumber)}
+    >
+      {seatNumber}
+    </div>
+  );
+};
 
 
 
 export function ShowPage() {
-  const [tickets, setTickets] = useState([]);
-  const [shoppingCart, setShoppingCart] = useState([]);
+  const [hall, setHall] = useState({});
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const showId = useParams().id;
+  const navigate = useNavigate ();
 
   useEffect(() => {
-    // Retrieve available tickets from the API
-    axios.get("https://localhost:7113/api/tickets").then(response => {
-      setTickets(response.data);
-    });
-  }, []);
+    axios.get(`https://localhost:7113/api/show/${showId}`)
+      .then(res => {
+        const show = res.data;
+        return axios.get(`https://localhost:7113/api/hall/${show.hallId}`);
+      })
+      .then(res => {
+        const hall = res.data;
+        setHall(hall);
+      })
+      .catch(error => console.error(error));
+  }, [showId]);
 
-  function handleAddToCart(ticket) {
-    // Add the selected ticket to the shopping cart
-    setShoppingCart([...shoppingCart, ticket]);
-  }
+  const handleSeatSelection = (seatNumber) => {
+    if (selectedSeats.includes(seatNumber)) {
+      setSelectedSeats(selectedSeats.filter(id => id !== seatNumber));
+    } else {
+      setSelectedSeats([...selectedSeats, seatNumber]);
+    }
+  };
 
-  function handleRemoveFromCart(ticket) {
-    // Remove the selected ticket from the shopping cart
-    setShoppingCart(shoppingCart.filter(t => t.TicketId !== ticket.TicketId));
-  }
+  const handleSubmit = () => {
+    Cookies.set('shoppingCart', JSON.stringify(selectedSeats), { expires: 7 });
+    navigate('/payment');
+  };
+
+
 
   return (
     <div>
-      <h2>Available Tickets</h2>
-      <ul>
-        {tickets.map(ticket => (
-          <li key={ticket.TicketId}>
-            {ticket.ShowDate} - {ticket.Price}
-            <button onClick={() => handleAddToCart(ticket)}>Add to Cart</button>
-          </li>
+      <h1>{hall.name}</h1>
+      <div>
+        <h2>First Class Seats ({hall.firstClassSeats})</h2>
+        {Array.from({ length: hall.firstClassSeats }, (_, i) => (
+          <Seat
+            key={`firstClassSeats-${i}`}
+            seatNumber={`A.${i + 1}`}
+            onClick={() => handleSeatSelection(`A${i + 1}`)}
+            selected={selectedSeats.includes(`A${i + 1}`)}
+          />
         ))}
-      </ul>
-
-      <h2>Shopping Cart</h2>
-      <ul>
-        {shoppingCart.map(ticket => (
-          <li key={ticket.TicketId}>
-            {ticket.ShowDate} - {ticket.Price}
-            <button onClick={() => handleRemoveFromCart(ticket)}>Remove</button>
-          </li>
+      </div>
+      <div>
+        <h2>Second Class Seats ({hall.secondClassSeats})</h2>
+        {Array.from({ length: hall.secondClassSeats }, (_, i) => (
+          <Seat
+          key={`secondClassSeats-${i}`}
+          seatNumber={`B.${i + 1}`}
+          onClick={() => handleSeatSelection(`B${i + 1}`)}
+          selected={selectedSeats.includes(`B${i + 1}`)}
+        />
         ))}
-      </ul>
-
-      <h3>Total Price: {shoppingCart.reduce((acc, cur) => acc + cur.Price, 0)}</h3>
+      </div>
+      <div>
+        <h2>Third Class Seats ({hall.thirdClassSeats})</h2>
+        {Array.from({ length: hall.thirdClassSeats }, (_, i) => (
+          <Seat
+          key={`thirdClassSeats-${i}`}
+          seatNumber={`C.${i + 1}`}
+          onClick={() => handleSeatSelection(`C${i + 1}`)}
+          selected={selectedSeats.includes(`C${i + 1}`)}
+        />
+        ))}
+      </div>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
 }
-

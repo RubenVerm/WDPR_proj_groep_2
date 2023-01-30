@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MyApp.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class BandController : ControllerBase

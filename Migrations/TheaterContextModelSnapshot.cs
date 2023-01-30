@@ -472,7 +472,6 @@ namespace Project2.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("BandId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("Duration")
@@ -487,7 +486,6 @@ namespace Project2.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("RoomId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ShowDate")
@@ -596,10 +594,14 @@ namespace Project2.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -740,8 +742,7 @@ namespace Project2.Migrations
                     b.HasOne("ORM.Band", "Band")
                         .WithMany("Shows")
                         .HasForeignKey("BandId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.ClientNoAction);
 
                     b.HasOne("ORM.Hall", "Hall")
                         .WithMany("Shows")
@@ -752,8 +753,7 @@ namespace Project2.Migrations
                     b.HasOne("ORM.Room", "Room")
                         .WithMany("Shows")
                         .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.ClientNoAction);
 
                     b.Navigation("Actor");
 

@@ -66,12 +66,6 @@ namespace Project2.Data
             .OnDelete(DeleteBehavior.ClientNoAction)
             .HasForeignKey(s => s.OrderId);
 
-            modelBuilder.Entity<Ticket>()
-            .HasOne(s => s.ShoppingCart)
-            .WithMany(r => r.Tickets)
-            .OnDelete(DeleteBehavior.ClientNoAction)
-            .HasForeignKey(s => s.ShoppingCartId);
-
             modelBuilder.Entity<BandMember>()
             .HasOne(s => s.Band)
             .WithMany(r => r.BandMembers)
@@ -93,7 +87,6 @@ namespace Project2.Data
         public DbSet<Band> Bands { get; set; }
         public DbSet<BandMember> BandMembers { get; set; }
         public DbSet<Show> Shows { get; set; }
-        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
 
     }

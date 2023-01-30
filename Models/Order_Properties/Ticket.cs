@@ -15,18 +15,8 @@ namespace ORM
 
         public string classSeats { get; set;}
 
-        public int Rownumber { get; set; }
-
-        public int Seatnumber { get; set; }
-
-        public DateTime ShowDate { get; set; }
-
-        public Boolean available {get; set;}
-
         [Required]
         public string CustomerId { get; set; }
-        
-        public int ShoppingCartId { get; set; }
 
         public int? HallId { get; set; }
 
@@ -38,7 +28,6 @@ namespace ORM
         [Required]
         public int OrderId { get; set; }
 
-        public virtual ShoppingCart ShoppingCart { get; set; }
         public virtual ApplicationUser Customer { get; set; }
         public virtual Hall? Hall { get; set; }
         public virtual Room? Room { get; set; }

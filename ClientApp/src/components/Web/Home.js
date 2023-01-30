@@ -12,7 +12,7 @@ export class Home extends Component {
       <div>
         <div className="image-container">
           <img id="main-image" src={require("./Media/v7_6.png")} />
-          <div class="centered">Theater Laak</div>
+          <div className="centered">Theater Laak</div>
         </div>
 
         <hr id="hr1"></hr>

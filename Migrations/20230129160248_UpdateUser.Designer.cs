@@ -12,8 +12,8 @@ using Project2.Data;
 namespace Project2.Migrations
 {
     [DbContext(typeof(TheaterContext))]
-    [Migration("20230128093011_test2")]
-    partial class test2
+    [Migration("20230129160248_UpdateUser")]
+    partial class UpdateUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -475,7 +475,6 @@ namespace Project2.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("BandId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("Duration")
@@ -490,7 +489,6 @@ namespace Project2.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("RoomId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ShowDate")
@@ -552,6 +550,13 @@ namespace Project2.Migrations
                     b.Property<int>("ShowId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("available")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("classSeats")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("TicketId");
 
                     b.HasIndex("CustomerId");
@@ -592,10 +597,14 @@ namespace Project2.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -736,8 +745,7 @@ namespace Project2.Migrations
                     b.HasOne("ORM.Band", "Band")
                         .WithMany("Shows")
                         .HasForeignKey("BandId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.ClientNoAction);
 
                     b.HasOne("ORM.Hall", "Hall")
                         .WithMany("Shows")
@@ -748,8 +756,7 @@ namespace Project2.Migrations
                     b.HasOne("ORM.Room", "Room")
                         .WithMany("Shows")
                         .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.ClientNoAction);
 
                     b.Navigation("Actor");
 

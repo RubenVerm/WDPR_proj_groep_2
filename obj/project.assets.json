@@ -11871,6 +11871,7 @@
   "projectFileDependencyGroups": {
     "net7.0": [
       "Microsoft.AspNetCore.ApiAuthorization.IdentityServer >= 7.0.2",
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.2",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 7.0.2",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 7.0.2",
       "Microsoft.AspNetCore.Identity.UI >= 7.0.2",
@@ -11888,11 +11889,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\Project2.csproj",
+      "projectUniqueName": "C:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\Project2.csproj",
       "projectName": "Project2",
-      "projectPath": "c:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\Project2.csproj",
+      "projectPath": "C:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\Project2.csproj",
       "packagesPath": "C:\\Users\\ruben\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\obj\\",
+      "outputPath": "C:\\Users\\ruben\\Documents\\School\\WDPR\\Project\\WDPR_proj_groep_2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ruben\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -11922,6 +11923,10 @@
         "targetAlias": "net7.0",
         "dependencies": {
           "Microsoft.AspNetCore.ApiAuthorization.IdentityServer": {
+            "target": "Package",
+            "version": "[7.0.2, )"
+          },
+          "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[7.0.2, )"
           },

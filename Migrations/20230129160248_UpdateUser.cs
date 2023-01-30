@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Project2.Migrations
 {
     /// <inheritdoc />
-    public partial class test2 : Migration
+    public partial class UpdateUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,8 +45,8 @@ namespace Project2.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CustomerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -344,9 +344,9 @@ namespace Project2.Migrations
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
                     ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BandId = table.Column<int>(type: "int", nullable: false),
+                    BandId = table.Column<int>(type: "int", nullable: true),
                     HallId = table.Column<int>(type: "int", nullable: false),
-                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    RoomId = table.Column<int>(type: "int", nullable: true),
                     ActorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -381,9 +381,11 @@ namespace Project2.Migrations
                     TicketId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    classSeats = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rownumber = table.Column<int>(type: "int", nullable: false),
                     Seatnumber = table.Column<int>(type: "int", nullable: false),
                     ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    available = table.Column<bool>(type: "bit", nullable: false),
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ShoppingCartId = table.Column<int>(type: "int", nullable: false),
                     HallId = table.Column<int>(type: "int", nullable: true),

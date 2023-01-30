@@ -10,7 +10,7 @@ using Project2.Data;
 using Microsoft.AspNetCore.Authorization;
 namespace Project2.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class TicketController : ControllerBase

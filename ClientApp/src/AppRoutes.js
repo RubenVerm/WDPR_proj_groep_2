@@ -8,7 +8,7 @@ import { Overons } from "./components/Web/Overons";
 import { Contact } from"./components/Web/Contact";
 import { MijnLaak } from"./components/Web/MijnLaak";
 import { ShowPage } from"./components/Web/ShowPage";
-
+import { Payment } from"./components/Web/Payment";
 
 const AppRoutes = [
   
@@ -49,11 +49,14 @@ const AppRoutes = [
     requireAuth: true,
     element: <MijnLaak />
   },
-
   {
     path: '/show/:id',
     requireAuth: true,
     element: <ShowPage />
+  },{
+    path: '/Payment',
+    requireAuth: true,
+    element: <Payment />
   },
   ...ApiAuthorzationRoutes
 ];

@@ -5,15 +5,25 @@ using Project2.Data;
 using Project2.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using RazorPagesPizza.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-var connectionString = "Server=RUBEN\\SQLEXPRESS;Database=TestDb;Integrated Security=True; TrustServerCertificate=True;";
-
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); 
 // Add services to the container.
 builder.Services.AddDbContext<TheaterContext>(options =>
      options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+builder.Services.AddAuthorization(options =>
+    options.AddPolicy("Admin", policy =>
+        policy.RequireAuthenticatedUser()
+            .RequireClaim("IsAdmin", bool.TrueString)));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>
 (options => options.SignIn.RequireConfirmedAccount = true)
@@ -38,14 +48,8 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-
-// builder.Services.AddAuthorization(options =>
-// {
-//     options.FallbackPolicy = new AuthorizationPolicyBuilder()
-//         .RequireAuthenticatedUser()
-//         .Build();
-// });
+builder.Services.AddRazorPages(options =>
+    options.Conventions.AuthorizePage("/AdminsOnly", "Admin"));
 
 
 builder.Services.Configure<IdentityOptions>(options =>
