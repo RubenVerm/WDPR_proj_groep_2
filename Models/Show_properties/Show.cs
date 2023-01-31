@@ -18,11 +18,11 @@ namespace ORM
         public int? RoomId { get; set; }
         public int? ActorId { get; set; }
         public virtual Band? Band { get; set; }
-        public virtual Hall Hall { get; set; }
+        public virtual Hall? Hall { get; set; }
         public virtual Room? Room { get; set; }
-        public virtual Actor Actor { get; set; }
+        public virtual Actor? Actor { get; set; }
 
-        public ICollection<Ticket> Tickets { get; set; }
+        public ICollection<Ticket>? Tickets { get; set; }
 
         
     }

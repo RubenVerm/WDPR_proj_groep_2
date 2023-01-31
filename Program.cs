@@ -11,7 +11,7 @@ using RazorPagesPizza.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 // Add services to the container.
 builder.Services.AddDbContext<TheaterContext>(options =>
      options.UseSqlServer(connectionString));
@@ -27,7 +27,7 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddDefaultIdentity<ApplicationUser>
 (options => options.SignIn.RequireConfirmedAccount = true)
-    // .AddRoles<IdentityRole>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<TheaterContext>();
 
 builder.Services.AddIdentityServer()
@@ -42,8 +42,8 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("https://localhost:7113",
-                                            "https://localhost",
-                                              "https://localhost:44437");
+                                              "https://localhost:44437").AllowAnyHeader()
+                                                          .AllowAnyMethod();
                       });
 });
 

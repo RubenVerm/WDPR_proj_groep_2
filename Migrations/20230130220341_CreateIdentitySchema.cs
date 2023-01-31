@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Project2.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateUser : Migration
+    public partial class CreateIdentitySchema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -295,25 +295,6 @@ namespace Project2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShoppingCarts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ShoppingCarts_AspNetUsers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "BandMembers",
                 columns: table => new
                 {
@@ -345,7 +326,7 @@ namespace Project2.Migrations
                     Duration = table.Column<int>(type: "int", nullable: false),
                     ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BandId = table.Column<int>(type: "int", nullable: true),
-                    HallId = table.Column<int>(type: "int", nullable: false),
+                    HallId = table.Column<int>(type: "int", nullable: true),
                     RoomId = table.Column<int>(type: "int", nullable: true),
                     ActorId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -382,12 +363,7 @@ namespace Project2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     classSeats = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rownumber = table.Column<int>(type: "int", nullable: false),
-                    Seatnumber = table.Column<int>(type: "int", nullable: false),
-                    ShowDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    available = table.Column<bool>(type: "bit", nullable: false),
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
                     HallId = table.Column<int>(type: "int", nullable: true),
                     RoomId = table.Column<int>(type: "int", nullable: true),
                     ShowId = table.Column<int>(type: "int", nullable: false),
@@ -416,11 +392,6 @@ namespace Project2.Migrations
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "RoomId");
-                    table.ForeignKey(
-                        name: "FK_Tickets_ShoppingCarts_ShoppingCartId",
-                        column: x => x.ShoppingCartId,
-                        principalTable: "ShoppingCarts",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Tickets_Shows_ShowId",
                         column: x => x.ShowId,
@@ -514,11 +485,6 @@ namespace Project2.Migrations
                 columns: new[] { "SubjectId", "SessionId", "Type" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCarts_CustomerId",
-                table: "ShoppingCarts",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Shows_ActorId",
                 table: "Shows",
                 column: "ActorId");
@@ -557,11 +523,6 @@ namespace Project2.Migrations
                 name: "IX_Tickets_RoomId",
                 table: "Tickets",
                 column: "RoomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tickets_ShoppingCartId",
-                table: "Tickets",
-                column: "ShoppingCartId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_ShowId",
@@ -607,9 +568,6 @@ namespace Project2.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
-
-            migrationBuilder.DropTable(
-                name: "ShoppingCarts");
 
             migrationBuilder.DropTable(
                 name: "Shows");

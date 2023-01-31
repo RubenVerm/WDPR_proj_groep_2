@@ -441,25 +441,6 @@ namespace Project2.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("ORM.ShoppingCart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("ShoppingCarts");
-                });
-
             modelBuilder.Entity("ORM.Show", b =>
                 {
                     b.Property<int>("ShowId")
@@ -482,7 +463,6 @@ namespace Project2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("HallId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("RoomId")
@@ -532,23 +512,8 @@ namespace Project2.Migrations
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rownumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Seatnumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ShoppingCartId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ShowDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("ShowId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("available")
-                        .HasColumnType("bit");
 
                     b.Property<string>("classSeats")
                         .IsRequired()
@@ -563,8 +528,6 @@ namespace Project2.Migrations
                     b.HasIndex("OrderId");
 
                     b.HasIndex("RoomId");
-
-                    b.HasIndex("ShoppingCartId");
 
                     b.HasIndex("ShowId");
 
@@ -722,17 +685,6 @@ namespace Project2.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("ORM.ShoppingCart", b =>
-                {
-                    b.HasOne("Project2.Models.ApplicationUser", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("ORM.Show", b =>
                 {
                     b.HasOne("ORM.Actor", "Actor")
@@ -747,8 +699,7 @@ namespace Project2.Migrations
                     b.HasOne("ORM.Hall", "Hall")
                         .WithMany("Shows")
                         .HasForeignKey("HallId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.ClientNoAction);
 
                     b.HasOne("ORM.Room", "Room")
                         .WithMany("Shows")
@@ -788,12 +739,6 @@ namespace Project2.Migrations
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.ClientNoAction);
 
-                    b.HasOne("ORM.ShoppingCart", "ShoppingCart")
-                        .WithMany("Tickets")
-                        .HasForeignKey("ShoppingCartId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
-                        .IsRequired();
-
                     b.HasOne("ORM.Show", "Show")
                         .WithMany("Tickets")
                         .HasForeignKey("ShowId")
@@ -807,8 +752,6 @@ namespace Project2.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Room");
-
-                    b.Navigation("ShoppingCart");
 
                     b.Navigation("Show");
                 });
@@ -841,11 +784,6 @@ namespace Project2.Migrations
                 {
                     b.Navigation("Shows");
 
-                    b.Navigation("Tickets");
-                });
-
-            modelBuilder.Entity("ORM.ShoppingCart", b =>
-                {
                     b.Navigation("Tickets");
                 });
 

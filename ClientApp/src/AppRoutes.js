@@ -9,7 +9,7 @@ import { Contact } from"./components/Web/Contact";
 import { MijnLaak } from"./components/Web/MijnLaak";
 import { ShowPage } from"./components/Web/ShowPage";
 import { Payment } from"./components/Web/Payment";
-
+import { Admin } from"./components/Web/Admin";
 const AppRoutes = [
   
   {
@@ -57,6 +57,11 @@ const AppRoutes = [
     path: '/Payment',
     requireAuth: true,
     element: <Payment />
+  },
+  {
+    path: '/Admin',
+    requireAuth: true,
+    element: <Admin />
   },
   ...ApiAuthorzationRoutes
 ];

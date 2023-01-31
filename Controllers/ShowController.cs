@@ -53,7 +53,7 @@ namespace MyApp.Controllers
     
     // PUT: api/Show/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [Authorize(Roles = "Administrator")]
+    
     [HttpPut("{id}")]
     public async Task<IActionResult> PutShow(int id, Show show)
     {
@@ -85,7 +85,6 @@ namespace MyApp.Controllers
 
     // POST: api/Show
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [Authorize(Roles = "Administrator")]
     [HttpPost]
     public async Task<ActionResult<Show>> PostShow(Show show)
     {
@@ -100,7 +99,6 @@ namespace MyApp.Controllers
     }
 
     // DELETE: api/Show/5
-    [Authorize(Roles = "Administrator")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteShow(int id)
     {
